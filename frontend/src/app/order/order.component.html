@@ -1,0 +1,31 @@
+<div>
+  <p>
+    Order status: <b>{{ status }}</b>
+    <select [(ngModel)]="selectedStatus">
+      <option *ngFor="let stat of statuses" [ngValue]="stat">{{ stat }}</option>
+    </select>
+    <button (click)="changeStatus(selectedStatus)">change status</button>
+  </p>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+      <th>Taxes</th>
+    </tr>
+    <tr *ngFor="let item of items">
+      <td>{{ item.name }}</td>
+      <td>{{ item.price }}</td>
+      <td>{{ item.quantity }}</td>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <td>{{ total }}</td>
+      <td>{{ taxes }}</td>
+    </tr>
+  </table>
+
+  <button routerLink="/admin">Go back to orders</button>
+</div>

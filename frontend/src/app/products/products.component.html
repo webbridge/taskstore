@@ -1,0 +1,22 @@
+<div>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Type</th>
+      <th>Price</th>
+      <th>Taxes</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let product of products">
+      <td>{{ product.name }}</td>
+      <td>{{ product.category }}</td>
+      <td>{{ product.type }}</td>
+      <td>{{ product.price | currency }}</td>
+      <td>{{ product.taxes | currency }}</td>
+      <td width="100" align="center">
+        <button class="addCartButton" (click)="cartService.addToCart(product)">add to cart</button>
+      </td>
+    </tr>
+  </table>
+</div>

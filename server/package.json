@@ -1,0 +1,30 @@
+{
+  "name": "task",
+  "version": "1.0.0",
+  "main": "app.ts",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon app.ts",
+    "test": "mocha -r ts-node/register tests/*.ts",
+    "lint": "tslint -c tslint.json './**/*.ts'"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.3",
+    "@types/express": "^4.17.1",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.7.5",
+    "@types/supertest": "^2.0.8",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.2",
+    "supertest": "^4.0.2",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
+  }
+}

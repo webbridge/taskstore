@@ -1,0 +1,37 @@
+<div *ngIf="!!cartService.items.length && cartService.showCart">
+  <h2>Cart</h2>
+  <table>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Type</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total</th>
+      <th>Taxes</th>
+    </tr>
+    <tr *ngFor="let item of cartService.items">
+      <td>
+        <button (click)="cartService.removeFromCart(item.id)">X</button>
+      </td>
+      <td>{{ item.name }}</td>
+      <td>{{ item.category }}</td>
+      <td>{{ item.type }}</td>
+      <td>{{ item.price | currency }}</td>
+      <td>{{ item.quantity }}</td>
+      <td colspan="2"></td>
+    </tr>
+    <tr>
+      <td colspan="6"></td>
+      <td>{{ cartService.getTotalPrice() | currency }}</td>
+      <td>{{ cartService.getAllTaxes() | currency }}</td>
+    </tr>
+  </table>
+
+  <button (click)="buyNow(cartService.prepareOrder())">Buy now!</button>
+</div>
+<div class="cartIcon" (click)="cartService.toogleCart()">
+  <i class="cartIconCounter">{{ cartService.getCartLength() }}</i>
+  <img src="/assets/cart.png" alt="cart" />
+</div>
