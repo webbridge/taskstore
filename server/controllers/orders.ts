@@ -35,10 +35,10 @@ class OrderController {
 
   addNewOrder = async (req: express.Request, res: express.Response, next) => {
     try {
-      const { message, serverStatus } = await this.model.addNewOrder(req.body);
+      await this.model.addNewOrder(req.body);
       const result: ResponseServer = {
-        message,
-        status: serverStatus
+        message: "New order was created",
+        status: 200
       };
       res.json(result);
     } catch (err) {

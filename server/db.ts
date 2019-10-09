@@ -1,15 +1,21 @@
-import * as mysql from "mysql";
+// import * as mysql from "mysql";
+import * as mysql from "mysql-promise";
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  database: "task",
-  password: "password"
-});
+// const connection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   database: "task",
+//   password: "password"
+// });
+const db = mysql();
 
-connection.connect((err) => {
-  if (err) throw err;
-  console.log("DB Connected");
-});
+if (!db.isConfigured()) {
+  db.configure({
+    host: "localhost",
+    user: "root",
+    database: "task",
+    password: "password"
+  });
+}
 
-export default connection;
+export default db;
