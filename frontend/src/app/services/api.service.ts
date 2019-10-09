@@ -24,8 +24,8 @@ export class ApiService {
     return this.http.get<Order>(`${this.URL}/order/${id}`);
   }
 
-  updateOrder(id, status): Observable<Object> {
-    return this.http.put<Object>(`${this.URL}/order/${id}`, { status });
+  updateOrder(id, status): Observable<object> {
+    return this.http.put<object>(`${this.URL}/order/${id}`, { status });
   }
 }
 

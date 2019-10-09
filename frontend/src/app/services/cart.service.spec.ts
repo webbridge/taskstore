@@ -1,9 +1,9 @@
-import { TestBed } from "@angular/core/testing"
+import { TestBed } from "@angular/core/testing";
 
-import { CartService } from "./cart.service"
+import { CartService } from "./cart.service";
 
 describe("CartService", () => {
-  let service: CartService
+  let service: CartService;
   const mockItems = [
     {
       id: 1,
@@ -23,46 +23,46 @@ describe("CartService", () => {
       type: "standard",
       quantity: 3
     }
-  ]
+  ];
 
   beforeEach(() => {
-    TestBed.configureTestingModule({})
-    service = TestBed.get(CartService)
-  })
+    TestBed.configureTestingModule({});
+    service = TestBed.get(CartService);
+  });
 
   it("should be created", () => {
-    expect(service).toBeTruthy()
-  })
+    expect(service).toBeTruthy();
+  });
 
   it("should geting cart length", () => {
-    service.items = mockItems
-    expect(service.getCartLength()).toBe(5)
-  })
+    service.items = mockItems;
+    expect(service.getCartLength()).toBe(5);
+  });
 
   it("should toogle cart", () => {
-    expect(service.showCart).toBeFalsy()
-    service.toogleCart()
-    expect(service.showCart).toBeTruthy()
-    service.toogleCart()
-    expect(service.showCart).toBeFalsy()
-  })
+    expect(service.showCart).toBeFalsy();
+    service.toogleCart();
+    expect(service.showCart).toBeTruthy();
+    service.toogleCart();
+    expect(service.showCart).toBeFalsy();
+  });
 
   it("should calculate total taxes", () => {
-    service.items = mockItems
-    expect(service.getAllTaxes()).toBe(24)
-  })
+    service.items = mockItems;
+    expect(service.getAllTaxes()).toBe(24);
+  });
 
   it("should calculate total price", () => {
-    service.items = mockItems
-    expect(service.getTotalPrice()).toBe(294)
-  })
+    service.items = mockItems;
+    expect(service.getTotalPrice()).toBe(294);
+  });
 
   it("should remove product from cart", () => {
-    service.items = mockItems
-    expect(service.items).toEqual(mockItems)
-    service.removeFromCart(1)
-    expect(service.items).toEqual([mockItems[1]])
-  })
+    service.items = mockItems;
+    expect(service.items).toEqual(mockItems);
+    service.removeFromCart(1);
+    expect(service.items).toEqual([mockItems[1]]);
+  });
 
   it("should add product to cart", () => {
     const newProduct = {
@@ -73,11 +73,11 @@ describe("CartService", () => {
       taxes: 0.8,
       type: "standard",
       quantity: 1
-    }
+    };
 
-    service.addToCart(newProduct)
-    expect(service.items).toEqual([newProduct])
-  })
+    service.addToCart(newProduct);
+    expect(service.items).toEqual([newProduct]);
+  });
 
   it("should prepare order to request", () => {
     const result = {
@@ -93,10 +93,10 @@ describe("CartService", () => {
       ],
       total: 294,
       taxes: 24
-    }
+    };
 
-    service.items = mockItems
-    expect(service.items).toEqual(mockItems)
-    expect(service.prepareOrder()).toEqual(result)
-  })
-})
+    service.items = mockItems;
+    expect(service.items).toEqual(mockItems);
+    expect(service.prepareOrder()).toEqual(result);
+  });
+});

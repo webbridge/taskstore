@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core"
-import { ApiService } from "../services/api.service"
+import { Component, OnInit } from "@angular/core";
+import { ApiService } from "../services/api.service";
 
 @Component({
   selector: "app-orders",
@@ -9,11 +9,11 @@ import { ApiService } from "../services/api.service"
 export class OrdersComponent implements OnInit {
   constructor(private apiService: ApiService) {}
 
-  private orders = []
+  private orders = [];
 
   ngOnInit() {
     this.apiService.getOrders().subscribe((res) => {
-      this.orders = res.data
-    })
+      this.orders = res.data;
+    });
   }
 }

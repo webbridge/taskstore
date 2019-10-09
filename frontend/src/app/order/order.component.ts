@@ -10,6 +10,14 @@ import { ActivatedRoute } from "@angular/router";
 export class OrderComponent implements OnInit {
   constructor(private router: ActivatedRoute, private apiService: ApiService) {}
 
+  orderId = 0;
+  total = 0;
+  taxes = 0;
+  items = [];
+  status = "";
+  selectedStatus = "";
+  statuses = ["pending", "in progress", "delivery", "done"];
+
   ngOnInit() {
     this.router.params.subscribe((params) => {
       this.orderId = params.id;
@@ -22,14 +30,6 @@ export class OrderComponent implements OnInit {
       });
     });
   }
-
-  orderId = 0;
-  total = 0;
-  taxes = 0;
-  items = [];
-  status = "";
-  selectedStatus = "";
-  statuses = ["pending", "in progress", "delivery", "done"];
 
   changeStatus(status: string) {
     this.apiService.updateOrder(this.orderId, status).subscribe((res) => {
