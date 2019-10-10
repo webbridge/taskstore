@@ -2,43 +2,14 @@ version: "3.7"
 
 services:
   db:
-    image: mysql:latest
-    container_name: mysqldb
+    image: mysql:5.7.27
     restart: always
     environment:
-      MYSQL_DATABASE: "task"
-      MYSQL_USER: "root"
-      MYSQL_PASSWORD: "password"
-      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: task
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
     volumes:
-      - ./db/task.sql:/docker-entrypoint-initdb.d/
+      - ./db/:/docker-entrypoint-initdb.d/
     ports:
-      - "3306:3306"
-    expose:
-      - "3306"
-  frontend:
-    container_name: angularfront
-    build:
-      context: "."
-      dockerfile: "./frontend/Dockerfile"
-    volumes:
-      - "./frontend:/usr/src/app"
-    command: >
-      bash -c "yarn && yarn start"
-    ports:
-      - "4200:4200"
-    expose:
-      - "4200"
-  server:
-    container_name: nodeserver
-    build:
-      context: "."
-      dockerfile: "./server/Dockerfile"
-    volumes:
-      - "./server:/usr/src/app"
-    command: >
-      bash -c "yarn && yarn start"
-    ports:
-      - "3000:3000"
-    expose:
-      - "3000"
+      - 3306:3306
