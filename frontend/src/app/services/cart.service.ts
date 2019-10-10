@@ -31,7 +31,9 @@ export class CartService {
   }
 
   getAllTaxes(): number {
-    return Number(this.items.reduce((acc, item) => acc + item.taxes * item.quantity, 0).toFixed(2));
+    return (
+      Math.round(this.items.reduce((acc, item) => acc + item.taxes * item.quantity, 0) * 20) / 20
+    );
   }
 
   prepareOrder() {
