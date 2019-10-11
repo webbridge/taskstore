@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Product } from "../types/cart";
 
 @Injectable({ providedIn: "root" })
 export class CartService {
@@ -58,14 +59,4 @@ export class CartService {
   toogleCart() {
     this.showCart = !this.showCart;
   }
-}
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  category: string;
-  taxes: number;
-  type: string;
-  quantity?: number;
 }

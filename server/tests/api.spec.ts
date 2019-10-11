@@ -1,7 +1,9 @@
 import * as supertest from "supertest";
 import { expect } from "chai";
+import { environment } from "../config";
 
-const server = supertest.agent("http://localhost:3000");
+const { BASE_URL } = environment.API;
+const server = supertest.agent(BASE_URL);
 
 describe("Testing API endpoints", () => {
   it("should be check '/orders' GET", (done) => {

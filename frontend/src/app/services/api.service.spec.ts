@@ -1,6 +1,9 @@
 import { TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { ApiService } from "./api.service";
+import { environment } from "../../config";
+
+const { BASE_URL } = environment.API;
 
 describe("ApiService", () => {
   let service: ApiService;
@@ -79,11 +82,11 @@ describe("ApiService", () => {
 
   it("should get products from '/products' via GET ", () => {
     service.getProducts().subscribe((products) => {
-      expect(products.length).toBe(2);
-      expect(products).toEqual(mockProducts);
+      expect(products.data.length).toBe(2);
+      expect(products.data).toEqual(mockProducts);
     });
 
-    const request = httpMock.expectOne(`${service.URL}/products`);
+    const request = httpMock.expectOne(`${BASE_URL}/products`);
     expect(request.request.method).toBe("GET");
     request.flush(mockProducts);
   });
@@ -95,7 +98,7 @@ describe("ApiService", () => {
       expect(orders).toEqual(mockOrders);
     });
 
-    const request = httpMock.expectOne(`${service.URL}/orders`);
+    const request = httpMock.expectOne(`${BASE_URL}/orders`);
     expect(request.request.method).toBe("GET");
     request.flush(mockOrders);
   });
@@ -106,7 +109,7 @@ describe("ApiService", () => {
       expect(order).toEqual(mockOrder);
     });
 
-    const request = httpMock.expectOne(`${service.URL}/order/${id}`);
+    const request = httpMock.expectOne(`${BASE_URL}/order/${id}`);
     expect(request.request.method).toBe("GET");
     request.flush(mockOrder);
   });

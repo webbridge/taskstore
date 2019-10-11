@@ -1,67 +1,32 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { Products, Order, Orders } from "../types/api";
+import { environment } from "../../config";
+
+const { BASE_URL, PRODUCTS, ORDER, ORDERS } = environment.API;
 
 @Injectable({ providedIn: "root" })
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  URL = "http://localhost:3000";
-
   getProducts(): Observable<Products> {
-    return this.http.get<Products>(`${this.URL}/products`);
+    return this.http.get<Products>(`${BASE_URL + PRODUCTS}`);
   }
 
   sendOrder(order): Observable<Orders> {
-    return this.http.post<Orders>(`${this.URL}/order/`, order);
+    return this.http.post<Orders>(`${BASE_URL + ORDERS}`, order);
   }
 
   getOrders(): Observable<Orders> {
-    return this.http.get<Orders>(`${this.URL}/orders`);
+    return this.http.get<Orders>(`${BASE_URL + ORDERS}`);
   }
 
   getOrder(id): Observable<Order> {
-    return this.http.get<Order>(`${this.URL}/order/${id}`);
+    return this.http.get<Order>(`${BASE_URL + ORDER + id}`);
   }
 
   updateOrder(id, status): Observable<object> {
-    return this.http.put<object>(`${this.URL}/order/${id}`, { status });
+    return this.http.put<object>(`${BASE_URL + ORDER + id}`, { status });
   }
-}
-
-interface Products {
-  data: {
-    id: number;
-    name: string;
-    price: number;
-    category: string;
-    taxes: number;
-    type: string;
-  }[];
-}
-
-interface Orders {
-  status: number;
-  data: {
-    id: number;
-    status: string;
-    total: number;
-    taxes: number;
-    created_at: string;
-    count: number;
-  }[];
-}
-
-interface Order {
-  data: {
-    items: {
-      id: number;
-      name: string;
-      price: number;
-      quantity: number;
-    }[];
-    total: number;
-    taxes: number;
-    status: string;
-  };
 }
