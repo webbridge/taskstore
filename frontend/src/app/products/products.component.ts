@@ -8,12 +8,12 @@ import { CartService } from "../services/cart.service";
   styleUrls: ["./products.component.scss"]
 })
 export class ProductsComponent implements OnInit {
-  constructor(private apiService: ApiService, private cartService: CartService) {}
+  constructor(private apiService: ApiService, public cartService: CartService) {}
 
   products = [];
 
   ngOnInit() {
-    this.apiService.getProducts().subscribe(data => {
+    this.apiService.getProducts().subscribe((data) => {
       this.products = data.data;
     });
   }

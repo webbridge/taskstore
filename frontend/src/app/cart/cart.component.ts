@@ -8,7 +8,7 @@ import { ApiService } from "../services/api.service";
   styleUrls: ["./cart.component.scss"]
 })
 export class CartComponent {
-  constructor(private cartService: CartService, private apiService: ApiService) {}
+  constructor(public cartService: CartService, private apiService: ApiService) {}
 
   buyNow(order) {
     this.apiService.sendOrder(order).subscribe((data) => {

@@ -1,18 +1,24 @@
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Status</th>
-    <th>Total</th>
-    <th>Taxes</th>
-    <th>Date</th>
-    <th></th>
-  </tr>
-  <tr *ngFor="let order of orders">
-    <td>{{ order.id }}</td>
-    <td>{{ order.status }}</td>
-    <td>{{ order.total }}</td>
-    <td>{{ order.taxes }}</td>
-    <td>{{ order.created_at | date: "medium" }}</td>
-    <td><button [routerLink]="['/order/', order.id]">check order</button></td>
-  </tr>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Status</th>
+      <th>Total</th>
+      <th>Taxes</th>
+      <th>Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.id }}</td>
+      <td>{{ order.status }}</td>
+      <td>{{ order.total }}</td>
+      <td>{{ order.taxes }}</td>
+      <td>{{ order.created_at | date: "medium" }}</td>
+      <td class="text-center">
+        <button class="btn btn-light" [routerLink]="['/order/', order.id]">check order</button>
+      </td>
+    </tr>
+  </tbody>
 </table>

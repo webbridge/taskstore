@@ -1,22 +1,35 @@
-<div>
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Category</th>
-      <th>Type</th>
-      <th>Price</th>
-      <th>Taxes</th>
-      <th></th>
-    </tr>
-    <tr *ngFor="let product of products">
-      <td>{{ product.name }}</td>
-      <td>{{ product.category }}</td>
-      <td>{{ product.type }}</td>
-      <td>{{ product.price | currency }}</td>
-      <td>{{ product.taxes | currency }}</td>
-      <td width="100" align="center">
-        <button class="addCartButton" (click)="cartService.addToCart(product)">add to cart</button>
-      </td>
-    </tr>
-  </table>
+<div class="row">
+  <div class="col-md-4 product-container" *ngFor="let product of products">
+    <div class="product">
+      <div class="product-image">
+        <img src="{{ product.image || '/assets/empty.png' }}" alt="{{ product.name }}" />
+      </div>
+      <div class="product-info">
+        <div class="product-title">{{ product.name }}</div>
+        <div class="product-category">
+          <p>
+            Category: <span>{{ product.category }}</span>
+          </p>
+          <p>
+            Type: <span>{{ product.type }}</span>
+          </p>
+          <div class="clearfix"></div>
+        </div>
+        <div class="product-price">
+          <p>
+            Price: <span>{{ product.price | currency }}</span>
+          </p>
+          <p>
+            Taxes: <span>{{ product.taxes | currency }}</span>
+          </p>
+          <div class="clearfix"></div>
+        </div>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary" (click)="cartService.addToCart(product)">
+            Add to cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
