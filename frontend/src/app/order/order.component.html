@@ -2,7 +2,9 @@
   <div class="status">
     <span>Order status:</span>
     <select class="custom-select" [(ngModel)]="selectedStatus">
-      <option *ngFor="let status of statuses" [ngValue]="status">{{ status }}</option>
+      <option *ngFor="let status of statuses | keyvalue" [ngValue]="status.value">
+        {{ status.value }}
+      </option>
     </select>
     <button class="btn btn-info" (click)="changeStatus(selectedStatus)">change status</button>
   </div>

@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { MENU_LINKS } from "../../models";
 
 @Component({
   selector: "app-menu",
@@ -6,7 +7,9 @@ import { Component } from "@angular/core";
   styleUrls: ["./menu.component.scss"]
 })
 export class MenuComponent {
-  constructor() {}
+  constructor() {
+    this.menuItems = MENU_LINKS;
+  }
 
-  menuItems = [{ link: "/", label: "Home Page" }, { link: "/admin", label: "Admin Panel" }];
+  public menuItems;
 }

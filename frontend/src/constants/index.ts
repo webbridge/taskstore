@@ -1,8 +1,8 @@
 export enum OrderState {
-  Pending = "Pending",
-  InProgress = "InProgress",
-  Delivered = "Delivered",
-  Done = "Done"
+  Pending = "pending",
+  InProgress = "in progress",
+  Delivered = "delivered",
+  Done = "done"
 }
 
 export enum RoutePath {

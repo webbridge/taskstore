@@ -1,8 +1,10 @@
+import { OrderState } from "../constants";
+
 export interface Orders {
   status: number;
   data: {
     id: number;
-    status: string;
+    status: OrderState;
     total: number;
     taxes: number;
     created_at: string;
@@ -20,6 +22,6 @@ export interface Order {
     }[];
     total: number;
     taxes: number;
-    status: string;
+    status: OrderState;
   };
 }

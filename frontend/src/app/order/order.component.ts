@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { OrdersService } from "../../services/orders.service";
+import { OrderState } from "../../constants";
 
 @Component({
   selector: "app-order",
@@ -8,7 +9,9 @@ import { OrdersService } from "../../services/orders.service";
   styleUrls: ["./order.component.scss"]
 })
 export class OrderComponent implements OnInit {
-  constructor(private router: ActivatedRoute, private ordersService: OrdersService) {}
+  constructor(private router: ActivatedRoute, private ordersService: OrdersService) {
+    this.statuses = OrderState;
+  }
 
   orderId = 0;
   total = 0;
@@ -16,7 +19,7 @@ export class OrderComponent implements OnInit {
   items = [];
   status = "";
   selectedStatus = "";
-  statuses = ["pending", "in progress", "delivery", "done"];
+  statuses;
 
   ngOnInit() {
     this.router.params.subscribe((params) => {
