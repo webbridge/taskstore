@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ApiService } from "../services/api.service";
+import { OrdersService } from "../services/orders.service";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -8,7 +8,7 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./order.component.scss"]
 })
 export class OrderComponent implements OnInit {
-  constructor(private router: ActivatedRoute, private apiService: ApiService) {}
+  constructor(private router: ActivatedRoute, private ordersService: OrdersService) {}
 
   orderId = 0;
   total = 0;
@@ -21,18 +21,20 @@ export class OrderComponent implements OnInit {
   ngOnInit() {
     this.router.params.subscribe((params) => {
       this.orderId = params.id;
-      this.apiService.getOrder(params.id).subscribe(({ data: { total, taxes, items, status } }) => {
-        this.total = total;
-        this.taxes = taxes;
-        this.items = items;
-        this.status = status;
-        this.selectedStatus = status;
-      });
+      this.ordersService
+        .getOrder(params.id)
+        .subscribe(({ data: { total, taxes, items, status } }) => {
+          this.total = total;
+          this.taxes = taxes;
+          this.items = items;
+          this.status = status;
+          this.selectedStatus = status;
+        });
     });
   }
 
   changeStatus(status: string) {
-    this.apiService.updateOrder(this.orderId, status).subscribe((res) => {
+    this.ordersService.updateOrder(this.orderId, status).subscribe((res) => {
       this.status = this.selectedStatus;
     });
   }
