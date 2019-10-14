@@ -1,7 +1,7 @@
 import { TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { ProductsService } from "./products.service";
-import { environment } from "../../config";
+import { environment } from "../environments/environment";
 
 const { BASE_URL } = environment.API;
 

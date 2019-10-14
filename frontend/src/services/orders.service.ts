@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Order, Orders } from "../types/api";
-import { environment } from "../../config";
+import { Order, Orders } from "../interfaces/orders";
+import { environment } from "../environments/environment";
 
 const { BASE_URL, ORDER, ORDERS } = environment.API;
 

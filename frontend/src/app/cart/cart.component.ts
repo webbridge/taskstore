@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { CartService } from "../services/cart.service";
-import { OrdersService } from "../services/orders.service";
+import { CartService } from "../../services/cart.service";
+import { OrdersService } from "../../services/orders.service";
 
 @Component({
   selector: "app-cart",
