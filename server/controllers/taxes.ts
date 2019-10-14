@@ -10,7 +10,7 @@ class TaxesController {
 
   getTaxes = async (req: Request, res: Response) => {
     try {
-      const taxes = await this.model.getTaxes(req.query.ids);
+      const taxes = await this.model.getTaxes(req.body);
       const result = {
         data: taxes
       };

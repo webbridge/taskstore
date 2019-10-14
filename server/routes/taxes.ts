@@ -8,6 +8,6 @@ const router = express.Router();
 const model = new TaxesModel();
 const controller = new TaxesController(model);
 
-router.get("/taxes", controller.getTaxes);
+router.post("/taxes", controller.getTaxes);
 
 export default router;

@@ -1,16 +1,17 @@
 import { Injectable } from "@angular/core";
 import { Product } from "../interfaces/cart";
+import { TaxesService } from "./taxes.service";
 
 @Injectable({ providedIn: "root" })
 export class CartService {
-  constructor() {}
+  constructor(private taxesService: TaxesService) {}
 
   public showCart = false;
   public items: Product[] = [];
 
   addToCart(product: Product) {
-    if (this.items.filter((item) => product.id === item.id).length > 0) {
-      this.items.map((item) => {
+    if (this.items.filter(item => product.id === item.id).length > 0) {
+      this.items.map(item => {
         if (item.id === product.id) {
           item.quantity++;
           return item;
@@ -22,7 +23,7 @@ export class CartService {
   }
 
   removeFromCart(id: number) {
-    this.items = this.items.filter((item) => item.id !== id);
+    this.items = this.items.filter(item => item.id !== id);
   }
 
   getTotalPrice(): number {
@@ -50,16 +51,22 @@ export class CartService {
 
   getCartLength() {
     let result = 0;
-    this.items.forEach((item) => {
+    this.items.forEach(item => {
       result = result + item.quantity;
     });
     return result;
   }
 
-  toogleCart() {
-    this.showCart = !this.showCart;
-    if (!!this.showCart) {
-      console.log(123);
+  async toogleCart() {
+    if (!!this.items.length) {
+      this.showCart = !this.showCart;
+      if (!!this.showCart) {
+        const preparedBody = this.items.map(({ id, quantity }) => ({ id, quantity }));
+
+        this.taxesService.getTaxes(preparedBody).subscribe(data => {
+          console.log(data);
+        });
+      }
     }
   }
 }
