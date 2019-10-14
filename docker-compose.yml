@@ -13,3 +13,23 @@ services:
       - ./db/:/docker-entrypoint-initdb.d/
     ports:
       - 3306:3306
+ backend:
+    container_name: backendnode
+    build:
+      context: ./server/docker
+      dockerfile: Dockerfile
+    command: npm run start:${MODE_RUNNING}
+    env_file:
+      - ./server/.env
+    tty: true
+    volumes:
+      - ./server:/app
+    ports:
+      - ${DEV_SERVER_PORT}:${DEV_SERVER_PORT}
+    environment:
+      - NODE_ENV=development
+      - PORT=${DEV_SERVER_PORT}
+    links:
+      - db
+    depends_on:
+      - db

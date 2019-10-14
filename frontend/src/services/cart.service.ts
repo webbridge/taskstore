@@ -33,7 +33,7 @@ export class CartService {
 
   getAllTaxes(): number {
     return (
-      Math.round(this.items.reduce((acc, item) => acc + item.taxes * item.quantity, 0) * 20) / 20
+      Math.ceil(this.items.reduce((acc, item) => acc + item.taxes * item.quantity, 0) * 20) / 20
     );
   }
 

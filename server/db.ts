@@ -5,9 +5,9 @@ const db = mysql();
 db.configure({
   host: "localhost",
   port: "3306",
-  user: "test",
+  user: "root",
   database: "task",
-  password: "test"
+  password: "password"
 });
 
 export default db;

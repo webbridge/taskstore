@@ -11,7 +11,7 @@ export class OrdersService {
   constructor(private http: HttpClient) {}
 
   sendOrder(order): Observable<Orders> {
-    return this.http.post<Orders>(`${BASE_URL + ORDERS}`, order);
+    return this.http.post<Orders>(`${BASE_URL + ORDER}`, order);
   }
 
   getOrders(): Observable<Orders> {
