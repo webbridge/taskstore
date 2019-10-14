@@ -17,4 +17,8 @@ export class ProductsComponent implements OnInit {
       this.products = data.data;
     });
   }
+
+  test(ids) {
+    console.log(ids);
+  }
 }

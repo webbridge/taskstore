@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Products } from "types/products";
-import { ResponseItems } from "types/index";
+import { Products } from "interfaces/products";
+import { ResponseItems } from "interfaces/index";
 
 class ProductsController {
   private model: Products.Model;

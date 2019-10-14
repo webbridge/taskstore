@@ -2,6 +2,7 @@ import * as express from "express";
 import * as cors from "cors";
 import products from "./routes/products";
 import orders from "./routes/orders";
+import taxes from "./routes/taxes";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(
 // Routes
 app.use(products);
 app.use(orders);
+app.use(taxes);
 
 // Starting the server
 app.listen(app.get("port"), () => {

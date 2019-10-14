@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Orders } from "types/orders";
-import { ResponseItems, ResponseServer } from "types/index";
+import { Orders } from "interfaces/orders";
+import { ResponseItems, ResponseServer } from "interfaces/index";
 
 class OrderController {
   private model: Orders.Model;

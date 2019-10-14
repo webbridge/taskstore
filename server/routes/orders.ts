@@ -1,7 +1,7 @@
 import * as express from "express";
 import OrdersController from "../controllers/orders";
 import OrdersModel from "../models/orders";
-import { environment } from "../config";
+import { environment } from "../environments/environment";
 
 const { ORDER, ORDERS } = environment.API;
 const router = express.Router();

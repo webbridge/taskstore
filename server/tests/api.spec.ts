@@ -1,6 +1,6 @@
 import * as supertest from "supertest";
 import { expect } from "chai";
-import { environment } from "../config";
+import { environment } from "../environments/environment";
 
 const { BASE_URL } = environment.API;
 const server = supertest.agent(BASE_URL);

@@ -58,5 +58,8 @@ export class CartService {
 
   toogleCart() {
     this.showCart = !this.showCart;
+    if (!!this.showCart) {
+      console.log(123);
+    }
   }
 }
