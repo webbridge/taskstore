@@ -47,16 +47,6 @@ describe("CartService", () => {
     expect(service.showCart).toBeFalsy();
   });
 
-  it("should calculate total taxes", () => {
-    service.items = mockItems;
-    expect(service.getAllTaxes()).toBe(24);
-  });
-
-  it("should calculate total price", () => {
-    service.items = mockItems;
-    expect(service.getTotalPrice()).toBe(294);
-  });
-
   it("should remove product from cart", () => {
     service.items = mockItems;
     expect(service.items).toEqual(mockItems);

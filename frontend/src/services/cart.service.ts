@@ -50,26 +50,14 @@ export class CartService {
     this.setTotals();
   }
 
-  getTotalPrice(): number {
-    return (
-      this.items.reduce((acc, item) => acc + item.price * item.quantity, 0) + this.getAllTaxes()
-    );
-  }
-
-  getAllTaxes(): number {
-    return (
-      Math.ceil(this.items.reduce((acc, item) => acc + item.taxes * item.quantity, 0) * 20) / 20
-    );
-  }
-
   prepareOrder() {
     return {
       items: this.items.map(({ id, quantity }) => ({
         product_id: id,
         quantity
       })),
-      total: this.getTotalPrice(),
-      taxes: this.getAllTaxes()
+      total: this.total,
+      taxes: this.taxes
     };
   }
 

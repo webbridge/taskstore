@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 14, 2019 at 06:41 PM
+-- Generation Time: Oct 15, 2019 at 11:15 AM
 -- Server version: 5.7.27-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.2
 
@@ -51,7 +51,7 @@ INSERT INTO `categories` (`id`, `name`, `tax_id`) VALUES
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `status` varchar(50) NOT NULL,
-  `total` float NOT NULL,
+  `total` double NOT NULL,
   `taxes` float NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -61,8 +61,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `status`, `total`, `taxes`, `created_at`) VALUES
-(62669514, 'pending', 126.98, 10, '2019-10-14 14:17:49'),
-(66270774, 'pending', 1149.78, 10.8, '2019-10-14 15:17:50');
+(26868721, 'pending', 126.98, 10, '2019-10-15 08:07:48'),
+(26890856, 'pending', 17263.05, 2250.8, '2019-10-15 08:08:10'),
+(26918605, 'pending', 1149.78, 10.8, '2019-10-15 08:08:38');
 
 -- --------------------------------------------------------
 
@@ -81,13 +82,15 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`order_id`, `product_id`, `quantity`) VALUES
-(62669514, 1, 1),
-(62669514, 2, 1),
-(62669514, 3, 1),
-(66270774, 7, 1),
-(66270774, 8, 1),
-(66270774, 9, 1),
-(66270774, 10, 1);
+(26868721, 1, 1),
+(26868721, 2, 1),
+(26868721, 3, 1),
+(26890856, 4, 1),
+(26890856, 6, 1),
+(26918605, 7, 1),
+(26918605, 8, 1),
+(26918605, 9, 1),
+(26918605, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -213,7 +216,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66270775;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26918606;
 --
 -- Constraints for dumped tables
 --
