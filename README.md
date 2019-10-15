@@ -17,7 +17,9 @@ docker-compose up -d
 ```
 
 **Database** uses `mysql` image and run through port `3306`
+
 **Frontend** uses `node` image and run through port `4200`
+
 **Backend** uses `node` image and run through port `3000`
 
 **_UI:_ http://localhost:4200**
