@@ -1,27 +1,22 @@
 # TaskStore
 
-For starting project you need to
+To start the project you need:
 
-## Run database via docker-compose
+## Install docker && docker-compose
 
-For installing docker compose please visit https://docs.docker.com/compose/install/
+To install docker, please visit: https://docs.docker.com/install/
+To install docker-compose, please visit: https://docs.docker.com/compose/install/
 
-```
-docker-compose up
-```
+## Run application via docker-compose
 
-## Run server side :
-
-```
-CD ./server
-npm install (for installing all packages)
-npm start
-```
-
-## Run server side :
+docker compose will create containers : `db`, `frontendangular`, `backendnode`
 
 ```
-CD ./frontend
-npm install (for installing all packages)
-npm start
+docker-compose up -d
 ```
+
+**Database** uses `mysql` image and run through port `3306`
+**Frontend** uses `node` image and run through port `4200`
+**Backend** uses `node` image and run through port `3000`
+
+**_UI:_ http://localhost:4200**
