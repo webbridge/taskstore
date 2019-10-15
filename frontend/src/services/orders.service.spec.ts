@@ -2,18 +2,20 @@ import { TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { OrdersService } from "./orders.service";
 import { environment } from "../environments/environment";
+import { Orders, Order } from "../interfaces/orders";
+import { OrderState } from "../constants";
 
-const { BASE_URL } = environment.API;
+const { BASE_URL, ORDERS, ORDER } = environment.API;
 
 describe("OrdersService", () => {
   let service: OrdersService;
   let httpMock: HttpTestingController;
 
-  const mockOrders = {
+  const mockOrders: Orders = {
     data: [
       {
         id: 1,
-        status: "pending",
+        status: OrderState.Pending,
         total: 100,
         taxes: 10,
         created_at: "16/08/2019",
@@ -21,7 +23,7 @@ describe("OrdersService", () => {
       },
       {
         id: 2,
-        status: "pending",
+        status: OrderState.Pending,
         total: 178,
         taxes: 8.9,
         created_at: "05/09/2019",
@@ -31,18 +33,20 @@ describe("OrdersService", () => {
     status: 200
   };
 
-  const mockOrder = {
-    items: [
-      {
-        id: 1,
-        name: "chicken",
-        price: 10,
-        quantity: 2
-      }
-    ],
-    total: 20,
-    taxes: 2,
-    status: "pending"
+  const mockOrder: Order = {
+    data: {
+      items: [
+        {
+          id: 1,
+          name: "chicken",
+          price: 10,
+          quantity: 2
+        }
+      ],
+      total: 20,
+      taxes: 2,
+      status: OrderState.Pending
+    }
   };
 
   beforeEach(() => {
@@ -70,18 +74,18 @@ describe("OrdersService", () => {
       expect(orders).toEqual(mockOrders);
     });
 
-    const request = httpMock.expectOne(`${BASE_URL}/orders`);
+    const request = httpMock.expectOne(BASE_URL + ORDERS);
     expect(request.request.method).toBe("GET");
     request.flush(mockOrders);
   });
 
   it("should get orders from '/order' by 'id' via GET ", () => {
-    const id = 1;
+    const id = "26868721";
     service.getOrder(id).subscribe((order) => {
       expect(order).toEqual(mockOrder);
     });
 
-    const request = httpMock.expectOne(`${BASE_URL}/order/${id}`);
+    const request = httpMock.expectOne(BASE_URL + ORDER + id);
     expect(request.request.method).toBe("GET");
     request.flush(mockOrder);
   });

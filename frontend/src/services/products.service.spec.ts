@@ -2,30 +2,33 @@ import { TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { ProductsService } from "./products.service";
 import { environment } from "../environments/environment";
+import { Products } from "../interfaces/products";
 
-const { BASE_URL } = environment.API;
+const { BASE_URL, PRODUCTS } = environment.API;
 
 describe("ProductsService", () => {
   let service: ProductsService;
   let httpMock: HttpTestingController;
-  const mockProducts = [
-    {
-      id: 1,
-      name: "Chicken",
-      price: 30,
-      category: "Meat",
-      taxes: 1.5,
-      type: "imported"
-    },
-    {
-      id: 2,
-      name: "Lego star wars",
-      price: 70,
-      category: "Toys",
-      taxes: 7,
-      type: "standard"
-    }
-  ];
+  const mockProducts: Products = {
+    data: [
+      {
+        id: 1,
+        name: "Chicken",
+        price: 30,
+        category: "Meat",
+        taxes: 1.5,
+        type: "imported"
+      },
+      {
+        id: 2,
+        name: "Lego star wars",
+        price: 70,
+        category: "Toys",
+        taxes: 7,
+        type: "standard"
+      }
+    ]
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -48,10 +51,10 @@ describe("ProductsService", () => {
   it("should get products from '/products' via GET ", () => {
     service.getProducts().subscribe((products) => {
       expect(products.data.length).toBe(2);
-      expect(products.data).toEqual(mockProducts);
+      expect(products).toEqual(mockProducts);
     });
 
-    const request = httpMock.expectOne(`${BASE_URL}/products`);
+    const request = httpMock.expectOne(BASE_URL + PRODUCTS);
     expect(request.request.method).toBe("GET");
     request.flush(mockProducts);
   });
