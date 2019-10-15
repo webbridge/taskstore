@@ -77,8 +77,12 @@ export class CartService {
     }
   }
 
-  clearCart() {
+  closeCart() {
     this.showCart = false;
+  }
+
+  clearCart() {
+    this.closeCart();
     this.items = [];
   }
 }

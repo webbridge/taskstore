@@ -38,6 +38,9 @@
       Buy now!
     </button>
   </div>
+  <div class="close-cart" (click)="cartService.closeCart()">
+    X
+  </div>
 </div>
 <div class="cartIcon" (click)="cartService.toogleCart()">
   <i class="cartIconCounter">{{ cartService.getCartLength() }}</i>

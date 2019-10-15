@@ -123,6 +123,21 @@ img {
   border-radius: 20px;
   box-shadow: 2px 2px 20px -5px #bbb;
 
+  .close-cart {
+    position: absolute;
+    top: -20px;
+    right: -30px;
+    background: #fff;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 15px -5px #bbb;
+    cursor: pointer;
+  }
+
   .btn.buy-now {
     width: 100%;
     font-weight: 700;
