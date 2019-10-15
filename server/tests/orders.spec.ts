@@ -4,7 +4,7 @@ import { environment } from "../environments/environment";
 
 const { BASE_URL, ORDER, ORDERS } = environment.API;
 const server = supertest.agent(BASE_URL);
-const id = "62669514";
+const id = "26868721";
 
 describe("Testing Orders endpoints", () => {
   it("should be check '/orders' GET", (done) => {
