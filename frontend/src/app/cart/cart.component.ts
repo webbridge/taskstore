@@ -12,6 +12,7 @@ export class CartComponent {
 
   buyNow(order) {
     this.ordersService.sendOrder(order).subscribe((data) => {
+      this.cartService.clearCart();
       console.log(data);
     });
   }

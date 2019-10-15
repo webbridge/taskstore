@@ -9,7 +9,14 @@ export namespace Cart {
     quantity: number;
   }
 
+  interface ResponseTotals {
+    id: number;
+    price: number;
+    type_taxes: number;
+    category_taxes: number;
+  }
+
   interface Model {
-    getTotals: (body: ResponseBody[]) => Promise<Item[]>;
+    getTotals: (body: ResponseBody[]) => Promise<Item>;
   }
 }

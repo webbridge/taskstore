@@ -9,12 +9,7 @@ class CartController {
 
   getTotals = async (req: Request, res: Response) => {
     try {
-      const data = await this.model.getTotals(req.body);
-      const result: Cart.Item = {
-        taxes: data.reduce((acc, item) => acc + item.taxes, 0),
-        total: data.reduce((acc, item) => acc + item.total, 0)
-      };
-
+      const result: Cart.Item = await this.model.getTotals(req.body);
       res.json(result);
     } catch (err) {
       throw err;

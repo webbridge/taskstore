@@ -3,7 +3,7 @@ import * as mysql from "mysql-promise";
 const db = mysql();
 
 db.configure({
-  host: "localhost",
+  host: "db",
   port: "3306",
   user: "test",
   database: "task",
