@@ -10,10 +10,18 @@ To install docker-compose, please visit: https://docs.docker.com/compose/install
 
 ## Run application via docker-compose
 
-docker compose will create containers : `db`, `frontendangular`, `backendnode`
+docker compose will create containers : `db`, `backendnode`
 
 ```
 docker-compose up -d
+```
+
+## Run frontend application
+
+```
+cd frontend
+npm install
+npm start
 ```
 
 **Database** uses `mysql` image and run through port `3306`
