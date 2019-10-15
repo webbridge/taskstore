@@ -47,7 +47,9 @@ export class CartService {
 
   removeFromCart(id: number) {
     this.items = this.items.filter((item) => item.id !== id);
-    this.setTotals();
+    if (!!this.items.length) {
+      this.setTotals();
+    }
   }
 
   prepareOrder() {
@@ -73,5 +75,10 @@ export class CartService {
     if (!!this.items.length) {
       this.showCart = !this.showCart;
     }
+  }
+
+  clearCart() {
+    this.showCart = false;
+    this.items = [];
   }
 }
