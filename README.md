@@ -5,6 +5,7 @@ To start the project you need:
 ## Install docker && docker-compose
 
 To install docker, please visit: https://docs.docker.com/install/
+
 To install docker-compose, please visit: https://docs.docker.com/compose/install/
 
 ## Run application via docker-compose
