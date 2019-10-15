@@ -44,7 +44,7 @@ describe("CartService", () => {
     expect(service).toBeTruthy();
   });
 
-  it("should geting cart length", () => {
+  it("should checked cart length", () => {
     expect(service.getCartLength()).toBe(5);
   });
 
