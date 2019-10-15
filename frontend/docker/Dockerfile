@@ -1,5 +1,5 @@
 FROM node:latest
 WORKDIR /app
+# install and cache app dependencies
 RUN npm install
-EXPOSE 4200
 CMD ["node","--v"]

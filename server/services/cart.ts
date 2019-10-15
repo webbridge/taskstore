@@ -8,10 +8,6 @@ const calculateTaxes = ({ price, type_taxes, category_taxes }, quantity) => {
   );
 };
 
-const calculateTotalPrice = (price, quantity) => {
-  return (price * quantity).toFixed(2);
-};
-
 export const getTotals = (body: Cart.ResponseBody[], data: Cart.ResponseTotals[]): Cart.Item => {
   const totals = [];
 
@@ -20,7 +16,7 @@ export const getTotals = (body: Cart.ResponseBody[], data: Cart.ResponseTotals[]
       if (row.id === item.id) {
         totals.push({
           taxes: calculateTaxes(row, item.quantity),
-          total: calculateTotalPrice(row.price, item.quantity) + calculateTaxes(row, item.quantity)
+          total: row.price * item.quantity + calculateTaxes(row, item.quantity)
         });
       }
     });
