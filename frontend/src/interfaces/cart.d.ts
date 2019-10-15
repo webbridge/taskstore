@@ -7,3 +7,8 @@ export interface Product {
   type: string;
   quantity?: number;
 }
+
+export interface Totals {
+  taxes: number;
+  total: number;
+}

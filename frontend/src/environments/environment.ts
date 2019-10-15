@@ -9,7 +9,7 @@ export const environment = {
     PRODUCTS: "/products/",
     ORDER: "/order/",
     ORDERS: "/orders/",
-    TAXES: "/taxes/"
+    CART_TOTALS: "/cart/totals"
   }
 };
 

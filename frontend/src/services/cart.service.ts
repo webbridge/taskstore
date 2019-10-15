@@ -1,17 +1,24 @@
 import { Injectable } from "@angular/core";
-import { Product } from "../interfaces/cart";
-import { TaxesService } from "./taxes.service";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { Product, Totals } from "../interfaces/cart";
+import { environment } from "../environments/environment";
+
+const { BASE_URL, CART_TOTALS } = environment.API;
 
 @Injectable({ providedIn: "root" })
 export class CartService {
-  constructor(private taxesService: TaxesService) {}
+  constructor(private http: HttpClient) {}
 
   public showCart = false;
   public items: Product[] = [];
+  public taxes: number = 0;
+  public total: number = 0;
 
   addToCart(product: Product) {
-    if (this.items.filter(item => product.id === item.id).length > 0) {
-      this.items.map(item => {
+    // Adding items to cart
+    if (this.items.filter((item) => product.id === item.id).length > 0) {
+      this.items.map((item) => {
         if (item.id === product.id) {
           item.quantity++;
           return item;
@@ -20,10 +27,27 @@ export class CartService {
     } else {
       this.items.push({ ...product, quantity: 1 });
     }
+
+    // Calculating totals & taxes
+    this.setTotals();
+  }
+
+  getTotals(body): Observable<Totals> {
+    return this.http.post<Totals>(`${BASE_URL + CART_TOTALS}`, { items: [...body] });
+  }
+
+  setTotals() {
+    const preparedBody = this.items.map(({ id, quantity }) => ({ id, quantity }));
+
+    this.getTotals(preparedBody).subscribe(({ taxes, total }) => {
+      this.taxes = taxes;
+      this.total = total;
+    });
   }
 
   removeFromCart(id: number) {
-    this.items = this.items.filter(item => item.id !== id);
+    this.items = this.items.filter((item) => item.id !== id);
+    this.setTotals();
   }
 
   getTotalPrice(): number {
@@ -51,22 +75,15 @@ export class CartService {
 
   getCartLength() {
     let result = 0;
-    this.items.forEach(item => {
+    this.items.forEach((item) => {
       result = result + item.quantity;
     });
     return result;
   }
 
-  async toogleCart() {
+  toogleCart() {
     if (!!this.items.length) {
       this.showCart = !this.showCart;
-      if (!!this.showCart) {
-        const preparedBody = this.items.map(({ id, quantity }) => ({ id, quantity }));
-
-        this.taxesService.getTaxes(preparedBody).subscribe(data => {
-          console.log(data);
-        });
-      }
     }
   }
 }

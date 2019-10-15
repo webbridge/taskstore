@@ -4,6 +4,7 @@ export const environment = {
     BASE_URL: "http://localhost:3000",
     PRODUCTS: "/products/",
     ORDER: "/order/",
-    ORDERS: "/orders/"
+    ORDERS: "/orders/",
+    CART_TOTALS: "/cart/totals/"
   }
 };

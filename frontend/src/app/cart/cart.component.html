@@ -26,10 +26,10 @@
     </table>
     <div class="text-right prices">
       <p>
-        Total: <span>{{ cartService.getTotalPrice() | currency }}</span>
+        Total: <span>{{ cartService.total | currency }}</span>
       </p>
       <p>
-        Taxes: <span>{{ cartService.getAllTaxes() | currency }}</span>
+        Taxes: <span>{{ cartService.taxes | currency }}</span>
       </p>
     </div>
   </div>
