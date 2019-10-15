@@ -1,21 +1,23 @@
 import * as express from "express";
 import OrdersController from "../controllers/orders";
 import OrdersModel from "../models/orders";
+import { environment } from "../environments/environment";
 
+const { ORDER, ORDERS } = environment.API;
 const router = express.Router();
 const model = new OrdersModel();
 const controller = new OrdersController(model);
 
 // GET orders
-router.get("/orders", controller.getOrders);
+router.get(ORDERS, controller.getOrders);
 
 // GET order
-router.get("/order/:id", controller.getOrderById);
+router.get(`${ORDER}:id`, controller.getOrderById);
 
 // POST order (add new order)
-router.post("/order", controller.addNewOrder);
+router.post(ORDER, controller.addNewOrder);
 
 // UPDATE order status
-router.put("/order/:id", controller.updateOrder);
+router.put(`${ORDER}:id`, controller.updateOrder);
 
 export default router;

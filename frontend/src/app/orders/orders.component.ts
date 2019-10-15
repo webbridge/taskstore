@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ApiService } from "../services/api.service";
+import { OrdersService } from "../../services/orders.service";
 
 @Component({
   selector: "app-orders",
@@ -7,12 +7,12 @@ import { ApiService } from "../services/api.service";
   styleUrls: ["./orders.component.scss"]
 })
 export class OrdersComponent implements OnInit {
-  constructor(private apiService: ApiService) {}
+  constructor(private ordersService: OrdersService) {}
 
   private orders = [];
 
   ngOnInit() {
-    this.apiService.getOrders().subscribe((res) => {
+    this.ordersService.getOrders().subscribe((res) => {
       this.orders = res.data;
     });
   }

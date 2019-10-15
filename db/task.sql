@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 27, 2019 at 03:22 PM
+-- Generation Time: Oct 15, 2019 at 11:15 AM
 -- Server version: 5.7.27-0ubuntu0.18.04.1
 -- PHP Version: 7.2.19-0ubuntu0.18.04.2
 
@@ -39,9 +39,8 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`, `tax_id`) VALUES
 (1, 'candy', 3),
 (2, 'coffee', 3),
-(4, 'popcorn', 3),
-(5, 'meat', 1),
-(6, 'toys', 1);
+(3, 'popcorn', 3),
+(4, 'other', 1);
 
 -- --------------------------------------------------------
 
@@ -52,7 +51,7 @@ INSERT INTO `categories` (`id`, `name`, `tax_id`) VALUES
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `status` varchar(50) NOT NULL,
-  `total` float NOT NULL,
+  `total` double NOT NULL,
   `taxes` float NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -62,14 +61,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `status`, `total`, `taxes`, `created_at`) VALUES
-(1, 'in progress', 0, 0, '2019-09-10 13:27:13'),
-(2, 'pending', 0, 0, '2019-09-10 13:30:18'),
-(36897199, 'pending', 104, 12, '2019-09-17 16:14:57'),
-(37475664, 'pending', 388, 42, '2019-09-17 16:24:35'),
-(95551695, 'pending', 180, 23, '2019-09-18 08:32:31'),
-(95762705, 'pending', 12, 1.8, '2019-09-18 08:36:02'),
-(96474675, 'pending', 80, 8, '2019-09-18 08:47:54'),
-(96682589, 'pending', 111, 0, '2019-09-18 08:51:22');
+(26868721, 'pending', 126.98, 10, '2019-10-15 08:07:48'),
+(26890856, 'pending', 17263.05, 2250.8, '2019-10-15 08:08:10'),
+(26918605, 'pending', 1149.78, 10.8, '2019-10-15 08:08:38');
 
 -- --------------------------------------------------------
 
@@ -88,22 +82,15 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`order_id`, `product_id`, `quantity`) VALUES
-(1, 1, 2),
-(2, 3, 1),
-(2, 7, 1),
-(2, 7, 1),
-(2, 1, 1),
-(36897199, 1, 2),
-(36897199, 3, 1),
-(37475664, 3, 2),
-(37475664, 7, 2),
-(37475664, 1, 1),
-(95551695, 1, 6),
-(95551695, 3, 1),
-(95551695, 7, 1),
-(95762705, 1, 1),
-(96474675, 3, 1),
-(96682589, 2, 1);
+(26868721, 1, 1),
+(26868721, 2, 1),
+(26868721, 3, 1),
+(26890856, 4, 1),
+(26890856, 6, 1),
+(26918605, 7, 1),
+(26918605, 8, 1),
+(26918605, 9, 1),
+(26918605, 10, 1);
 
 -- --------------------------------------------------------
 
@@ -114,7 +101,7 @@ INSERT INTO `order_items` (`order_id`, `product_id`, `quantity`) VALUES
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `price` int(11) NOT NULL,
+  `price` double NOT NULL,
   `category_id` int(11) NOT NULL,
   `type_id` int(11) NOT NULL,
   `created_at` date NOT NULL
@@ -125,10 +112,15 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `price`, `category_id`, `type_id`, `created_at`) VALUES
-(1, 'chiken', 12, 5, 1, '2019-09-10'),
-(2, '16lb bag of Skittles', 111, 1, 2, '2019-09-10'),
-(3, 'Lego Pirates', 80, 6, 2, '2019-09-10'),
-(7, 'Water pistol', 28, 6, 1, '2019-09-10');
+(1, '16lb bag of Skittles', 16, 1, 2, '2019-10-14'),
+(2, 'Walkman', 99.99, 4, 2, '2019-10-14'),
+(3, 'bag of microwave Popcorn', 0.99, 3, 2, '2019-10-14'),
+(4, 'bag of Vanilla-Hazelnut Coffee', 11, 2, 1, '2019-10-14'),
+(6, 'Vespa', 15001.25, 4, 1, '2019-10-14'),
+(7, 'crate of Almond Snickers', 75.99, 1, 1, '2019-10-14'),
+(8, 'Discman', 55, 4, 2, '2019-10-14'),
+(9, 'Bottle of Wine', 10, 4, 1, '2019-10-14'),
+(10, '300# bag  of Fair-Traid Coffee', 997.99, 2, 2, '2019-10-14');
 
 -- --------------------------------------------------------
 
@@ -224,7 +216,7 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96682590;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26918606;
 --
 -- Constraints for dumped tables
 --

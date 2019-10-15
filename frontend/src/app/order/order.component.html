@@ -1,31 +1,38 @@
-<div>
-  <p>
-    Order status: <b>{{ status }}</b>
-    <select [(ngModel)]="selectedStatus">
-      <option *ngFor="let stat of statuses" [ngValue]="stat">{{ stat }}</option>
+<div class="order">
+  <div class="status">
+    <span>Order status:</span>
+    <select class="custom-select" [(ngModel)]="selectedStatus">
+      <option *ngFor="let status of statuses | keyvalue" [ngValue]="status.value">
+        {{ status.value }}
+      </option>
     </select>
-    <button (click)="changeStatus(selectedStatus)">change status</button>
-  </p>
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Total</th>
-      <th>Taxes</th>
-    </tr>
-    <tr *ngFor="let item of items">
-      <td>{{ item.name }}</td>
-      <td>{{ item.price }}</td>
-      <td>{{ item.quantity }}</td>
-      <td colspan="2"></td>
-    </tr>
-    <tr>
-      <td colspan="3"></td>
-      <td>{{ total }}</td>
-      <td>{{ taxes }}</td>
-    </tr>
+    <button class="btn btn-info" (click)="changeStatus(selectedStatus)">change status</button>
+  </div>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.name }}</td>
+        <td>{{ item.price | currency }}</td>
+        <td>{{ item.quantity }}</td>
+      </tr>
+    </tbody>
   </table>
 
-  <button routerLink="/admin">Go back to orders</button>
+  <div class="prices text-right">
+    <p>
+      Total: <span>{{ total | currency }}</span>
+    </p>
+    <p>
+      Taxes: <span>{{ taxes | currency }}</span>
+    </p>
+  </div>
+
+  <button class="btn btn-light" routerLink="/admin">Go back to orders</button>
 </div>

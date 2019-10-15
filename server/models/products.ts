@@ -1,5 +1,5 @@
 import db from "../db";
-import { Products } from "types/products";
+import { Products } from "interfaces/products";
 
 class ProductsModel implements Products.Model {
   async getProducts(): Promise<Products.Item[]> {

@@ -1,9 +1,11 @@
 import { TestBed } from "@angular/core/testing";
-
+import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { CartService } from "./cart.service";
 
 describe("CartService", () => {
   let service: CartService;
+  let httpMock: HttpTestingController;
+
   const mockItems = [
     {
       id: 1,
@@ -26,16 +28,23 @@ describe("CartService", () => {
   ];
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [CartService]
+    });
     service = TestBed.get(CartService);
+    httpMock = TestBed.get(HttpTestingController);
+
+    service.items = mockItems;
+    service.total = 294;
+    service.taxes = 24;
   });
 
   it("should be created", () => {
     expect(service).toBeTruthy();
   });
 
-  it("should geting cart length", () => {
-    service.items = mockItems;
+  it("should checked cart length", () => {
     expect(service.getCartLength()).toBe(5);
   });
 
@@ -47,24 +56,14 @@ describe("CartService", () => {
     expect(service.showCart).toBeFalsy();
   });
 
-  it("should calculate total taxes", () => {
-    service.items = mockItems;
-    expect(service.getAllTaxes()).toBe(24);
-  });
-
-  it("should calculate total price", () => {
-    service.items = mockItems;
-    expect(service.getTotalPrice()).toBe(294);
-  });
-
   it("should remove product from cart", () => {
-    service.items = mockItems;
     expect(service.items).toEqual(mockItems);
     service.removeFromCart(1);
     expect(service.items).toEqual([mockItems[1]]);
   });
 
   it("should add product to cart", () => {
+    service.items = [];
     const newProduct = {
       id: 3,
       name: "Cheese",
@@ -95,7 +94,6 @@ describe("CartService", () => {
       taxes: 24
     };
 
-    service.items = mockItems;
     expect(service.items).toEqual(mockItems);
     expect(service.prepareOrder()).toEqual(result);
   });

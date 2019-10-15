@@ -1,6 +1,6 @@
-import * as express from "express";
-import { Orders } from "types/orders";
-import { ResponseItems, ResponseServer } from "types/index";
+import { Request, Response } from "express";
+import { Orders } from "interfaces/orders";
+import { ResponseItems, ResponseServer } from "interfaces/index";
 
 class OrderController {
   private model: Orders.Model;
@@ -8,7 +8,7 @@ class OrderController {
     this.model = model;
   }
 
-  getOrders = async (req: express.Request, res: express.Response, next) => {
+  getOrders = async (req: Request, res: Response) => {
     try {
       const orders = await this.model.getOrders();
       const result: ResponseItems<Orders.Items[]> = {
@@ -16,11 +16,11 @@ class OrderController {
       };
       res.json(result);
     } catch (err) {
-      next(err);
+      throw err;
     }
   };
 
-  getOrderById = async (req: express.Request, res: express.Response, next) => {
+  getOrderById = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
       const orders = await this.model.getOrderById(id);
@@ -29,11 +29,11 @@ class OrderController {
       };
       res.json(result);
     } catch (err) {
-      next(err);
+      throw err;
     }
   };
 
-  addNewOrder = async (req: express.Request, res: express.Response, next) => {
+  addNewOrder = async (req: Request, res: Response) => {
     try {
       await this.model.addNewOrder(req.body);
       const result: ResponseServer = {
@@ -42,11 +42,11 @@ class OrderController {
       };
       res.json(result);
     } catch (err) {
-      next(err);
+      throw err;
     }
   };
 
-  updateOrder = async (req: express.Request, res: express.Response, next) => {
+  updateOrder = async (req: Request, res: Response) => {
     try {
       const {
         body: { status },
@@ -60,7 +60,7 @@ class OrderController {
       };
       res.json(result);
     } catch (err) {
-      next(err);
+      throw err;
     }
   };
 }

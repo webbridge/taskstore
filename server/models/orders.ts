@@ -1,6 +1,6 @@
 import db from "../db";
-import { Orders } from "types/orders";
-import { InsertAnswer } from "types/index";
+import { Orders } from "interfaces/orders";
+import { InsertAnswer } from "interfaces/index";
 
 class OrdersModel implements Orders.Model {
   async getOrders(): Promise<Orders.Items[]> {

@@ -1,6 +1,27 @@
 version: "3.7"
 
 services:
+  backend-server:
+    container_name: backendnode
+    build:
+      context: ./server/docker
+      dockerfile: Dockerfile
+    command: npm run start
+    env_file:
+      - ./server/.env
+    tty: true
+    volumes:
+      - ./server:/app
+    ports:
+      - 3000:3000
+      - 9228:9229
+    environment:
+      - PORT=3000
+    links:
+      - db
+    depends_on:
+      - db
+
   db:
     image: mysql:5.7.27
     restart: always
@@ -13,3 +34,22 @@ services:
       - ./db/:/docker-entrypoint-initdb.d/
     ports:
       - 3306:3306
+  # frontend-server:
+  #   container_name: frontendangular
+  #   build:
+  #     context: ./frontend/docker
+  #     dockerfile: Dockerfile
+  #   command: npm run start
+  #   env_file:
+  #     - ./frontend/.env
+  #   tty: true
+  #   volumes:
+  #     - ./frontend:/app
+  #   ports:
+  #     - 4200:4200
+  #   environment:
+  #     - PORT=4200
+  #   links:
+  #     - backend-server
+  #   depends_on:
+  #     - backend-server

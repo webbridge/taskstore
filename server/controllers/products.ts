@@ -1,6 +1,6 @@
-import * as express from "express";
-import { Products } from "types/products";
-import { ResponseItems } from "types/index";
+import { Request, Response } from "express";
+import { Products } from "interfaces/products";
+import { ResponseItems } from "interfaces/index";
 
 class ProductsController {
   private model: Products.Model;
@@ -8,7 +8,7 @@ class ProductsController {
     this.model = model;
   }
 
-  getProducts = async (req: express.Request, res: express.Response, next) => {
+  getProducts = async (req: Request, res: Response) => {
     try {
       const products = await this.model.getProducts();
       const result: ResponseItems<Products.Item[]> = {
@@ -16,7 +16,7 @@ class ProductsController {
       };
       res.json(result);
     } catch (err) {
-      next(err);
+      throw err;
     }
   };
 }

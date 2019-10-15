@@ -2,6 +2,7 @@ import * as express from "express";
 import * as cors from "cors";
 import products from "./routes/products";
 import orders from "./routes/orders";
+import cart from "./routes/cart";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(
 // Routes
 app.use(products);
 app.use(orders);
+app.use(cart);
 
 // Starting the server
 app.listen(app.get("port"), () => {

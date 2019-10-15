@@ -1,33 +1,21 @@
 import { TestBed } from "@angular/core/testing";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
-import { ApiService } from "./api.service";
+import { OrdersService } from "./orders.service";
+import { environment } from "../environments/environment";
+import { Orders, Order } from "../interfaces/orders";
+import { OrderState } from "../constants";
 
-describe("ApiService", () => {
-  let service: ApiService;
+const { BASE_URL, ORDERS, ORDER } = environment.API;
+
+describe("OrdersService", () => {
+  let service: OrdersService;
   let httpMock: HttpTestingController;
-  const mockProducts = [
-    {
-      id: 1,
-      name: "Chicken",
-      price: 30,
-      category: "Meat",
-      taxes: 1.5,
-      type: "imported"
-    },
-    {
-      id: 2,
-      name: "Lego star wars",
-      price: 70,
-      category: "Toys",
-      taxes: 7,
-      type: "standard"
-    }
-  ];
-  const mockOrders = {
+
+  const mockOrders: Orders = {
     data: [
       {
         id: 1,
-        status: "pending",
+        status: OrderState.Pending,
         total: 100,
         taxes: 10,
         created_at: "16/08/2019",
@@ -35,7 +23,7 @@ describe("ApiService", () => {
       },
       {
         id: 2,
-        status: "pending",
+        status: OrderState.Pending,
         total: 178,
         taxes: 8.9,
         created_at: "05/09/2019",
@@ -45,27 +33,29 @@ describe("ApiService", () => {
     status: 200
   };
 
-  const mockOrder = {
-    items: [
-      {
-        id: 1,
-        name: "chicken",
-        price: 10,
-        quantity: 2
-      }
-    ],
-    total: 20,
-    taxes: 2,
-    status: "pending"
+  const mockOrder: Order = {
+    data: {
+      items: [
+        {
+          id: 1,
+          name: "chicken",
+          price: 10,
+          quantity: 2
+        }
+      ],
+      total: 20,
+      taxes: 2,
+      status: OrderState.Pending
+    }
   };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ApiService]
+      providers: [OrdersService]
     });
 
-    service = TestBed.get(ApiService);
+    service = TestBed.get(OrdersService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -77,17 +67,6 @@ describe("ApiService", () => {
     expect(service).toBeTruthy();
   });
 
-  it("should get products from '/products' via GET ", () => {
-    service.getProducts().subscribe((products) => {
-      expect(products.length).toBe(2);
-      expect(products).toEqual(mockProducts);
-    });
-
-    const request = httpMock.expectOne(`${service.URL}/products`);
-    expect(request.request.method).toBe("GET");
-    request.flush(mockProducts);
-  });
-
   it("should get orders from '/orders' via GET ", () => {
     service.getOrders().subscribe((orders) => {
       expect(orders.status).toBe(200);
@@ -95,18 +74,18 @@ describe("ApiService", () => {
       expect(orders).toEqual(mockOrders);
     });
 
-    const request = httpMock.expectOne(`${service.URL}/orders`);
+    const request = httpMock.expectOne(BASE_URL + ORDERS);
     expect(request.request.method).toBe("GET");
     request.flush(mockOrders);
   });
 
   it("should get orders from '/order' by 'id' via GET ", () => {
-    const id = 1;
+    const id = "26868721";
     service.getOrder(id).subscribe((order) => {
       expect(order).toEqual(mockOrder);
     });
 
-    const request = httpMock.expectOne(`${service.URL}/order/${id}`);
+    const request = httpMock.expectOne(BASE_URL + ORDER + id);
     expect(request.request.method).toBe("GET");
     request.flush(mockOrder);
   });
