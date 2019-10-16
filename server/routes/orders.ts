@@ -15,9 +15,9 @@ router.get(ORDERS, controller.getOrders);
 router.get(`${ORDER}:id`, controller.getOrderById);
 
 // POST order (add new order)
-router.post(ORDER, controller.addNewOrder);
+router.post(ORDERS, controller.addNewOrder);
 
 // UPDATE order status
-router.put(`${ORDER}:id`, controller.updateOrder);
+router.put(`${ORDERS}:id`, controller.updateOrder);
 
 export default router;
