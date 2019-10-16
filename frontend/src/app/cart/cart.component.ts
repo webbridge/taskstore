@@ -10,10 +10,26 @@ import { OrdersService } from "../../services/orders.service";
 export class CartComponent {
   constructor(public cartService: CartService, private ordersService: OrdersService) {}
 
-  buyNow(order) {
+  showCart() {
+    return !!this.cartService.items.length && this.cartService.showCart;
+  }
+
+  buyNow() {
+    const order = this.cartService.prepareOrder();
     this.ordersService.sendOrder(order).subscribe((data) => {
       this.cartService.clearCart();
-      console.log(data);
     });
+  }
+
+  toogleCart() {
+    this.cartService.toogleCart();
+  }
+
+  closeCart() {
+    this.cartService.closeCart();
+  }
+
+  removeFromCart(id) {
+    this.cartService.removeFromCart(id);
   }
 }

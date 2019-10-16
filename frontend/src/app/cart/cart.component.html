@@ -1,4 +1,4 @@
-<div class="cart" *ngIf="!!cartService.items.length && cartService.showCart">
+<div class="cart" *ngIf="showCart()">
   <div>
     <table class="table">
       <thead class="thead-dark">
@@ -14,7 +14,7 @@
       <tbody>
         <tr *ngFor="let item of cartService.items">
           <td>
-            <button class="btn btn-danger" (click)="cartService.removeFromCart(item.id)">X</button>
+            <button class="btn btn-danger" (click)="removeFromCart(item.id)">X</button>
           </td>
           <td>{{ item.name }}</td>
           <td>{{ item.category }}</td>
@@ -34,15 +34,15 @@
     </div>
   </div>
   <div class="text-center">
-    <button class="btn btn-success buy-now" (click)="buyNow(cartService.prepareOrder())">
+    <button class="btn btn-success buy-now" (click)="buyNow()">
       Buy now!
     </button>
   </div>
-  <div class="close-cart" (click)="cartService.closeCart()">
+  <div class="close-cart" (click)="closeCart()">
     X
   </div>
 </div>
-<div class="cartIcon" (click)="cartService.toogleCart()">
+<div class="cartIcon" (click)="toogleCart()">
   <i class="cartIconCounter">{{ cartService.getCartLength() }}</i>
   <img src="/assets/cart.png" alt="cart" />
 </div>
