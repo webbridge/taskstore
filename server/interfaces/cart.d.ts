@@ -1,5 +1,5 @@
 export namespace Cart {
-  interface Item {
+  interface Total {
     taxes: number;
     total: number;
   }
@@ -17,6 +17,6 @@ export namespace Cart {
   }
 
   interface Model {
-    getTotals: (body: ResponseBody[]) => Promise<Item>;
+    getTotals: (body: number[]) => Promise<ResponseTotals[]>;
   }
 }

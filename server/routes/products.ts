@@ -5,7 +5,7 @@ import { environment } from "../environments/environment";
 
 const { PRODUCTS } = environment.API;
 const router = express.Router();
-const model = new ProductsModel();
+export const model = new ProductsModel();
 const controller = new ProductsController(model);
 
 router.get(PRODUCTS, controller.getProducts);

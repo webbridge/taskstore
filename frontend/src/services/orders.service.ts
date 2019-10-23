@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { Order, Orders } from "../interfaces/orders";
 import { environment } from "../environments/environment";
 
-const { BASE_URL, ORDER, ORDERS } = environment.API;
+const { BASE_URL, ORDERS } = environment.API;
 
 @Injectable({ providedIn: "root" })
 export class OrdersService {
@@ -19,7 +19,7 @@ export class OrdersService {
   }
 
   getOrder(id): Observable<Order> {
-    return this.http.get<Order>(`${BASE_URL + ORDER + id}`);
+    return this.http.get<Order>(`${BASE_URL + ORDERS + id}`);
   }
 
   updateOrder(id, status): Observable<object> {

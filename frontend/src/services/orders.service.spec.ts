@@ -5,7 +5,7 @@ import { environment } from "../environments/environment";
 import { Orders, Order } from "../interfaces/orders";
 import { OrderState } from "../constants";
 
-const { BASE_URL, ORDERS, ORDER } = environment.API;
+const { BASE_URL, ORDERS } = environment.API;
 
 describe("OrdersService", () => {
   let service: OrdersService;
@@ -85,7 +85,7 @@ describe("OrdersService", () => {
       expect(order).toEqual(mockOrder);
     });
 
-    const request = httpMock.expectOne(BASE_URL + ORDER + id);
+    const request = httpMock.expectOne(BASE_URL + ORDERS + id);
     expect(request.request.method).toBe("GET");
     request.flush(mockOrder);
   });

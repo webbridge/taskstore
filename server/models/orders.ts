@@ -5,12 +5,10 @@ import { InsertAnswer } from "interfaces/index";
 class OrdersModel implements Orders.Model {
   async getOrders(): Promise<Orders.Items[]> {
     try {
-      const data: Orders.Items[] = await db
-        .query(
-          "SELECT o.id, o.status, o.total, o.taxes, o.created_at, SUM(oi.quantity) AS count FROM orders AS o LEFT JOIN order_items AS oi ON o.id = oi.order_id GROUP BY o.id"
-        )
-        .spread((res) => res);
-      return data;
+      const [rows] = await db.query(
+        "SELECT o.id, o.status, o.total, o.taxes, o.created_at, SUM(oi.quantity) AS count FROM orders AS o LEFT JOIN order_items AS oi ON o.id = oi.order_id GROUP BY o.id"
+      );
+      return rows;
     } catch (err) {
       throw err;
     }
@@ -18,7 +16,7 @@ class OrdersModel implements Orders.Model {
 
   async getOrderById(id): Promise<Orders.OrderProducts> {
     try {
-      const [rows, fields] = await db.query(
+      const [rows] = await db.query(
         "SELECT p.id, IF(t.name = 'imported', CONCAT(t.name, ' ', p.name), p.name ) AS name , (p.price* oi.quantity) as price, oi.quantity, o.total, o.taxes, o.status FROM orders AS o INNER JOIN order_items AS oi ON o.id = oi.order_id LEFT JOIN products as p ON p.id=oi.product_id LEFT JOIN types AS t ON p.type_id = t.id WHERE o.id=?",
         [id]
       );
@@ -68,9 +66,7 @@ class OrdersModel implements Orders.Model {
 
   async updateOrder(status: string, id: number): Promise<InsertAnswer> {
     try {
-      const [rows, fields] = await db.query(`UPDATE orders SET status='${status}' WHERE id=?`, [
-        id
-      ]);
+      const [rows] = await db.query(`UPDATE orders SET status='${status}' WHERE id=?`, [id]);
       return rows;
     } catch (err) {
       throw err;

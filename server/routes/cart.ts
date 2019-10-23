@@ -5,7 +5,7 @@ import { environment } from "../environments/environment";
 
 const { CART_TOTALS } = environment.API;
 const router = express.Router();
-const model = new CartModel();
+export const model = new CartModel();
 const controller = new CartController(model);
 
 router.post(CART_TOTALS, controller.getTotals);

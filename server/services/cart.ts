@@ -8,11 +8,10 @@ const calculateTaxes = ({ price, type_taxes, category_taxes }, quantity) => {
   );
 };
 
-export const getTotals = (body: Cart.ResponseBody[], data: Cart.ResponseTotals[]): Cart.Item => {
+export const getTotals = (items: Cart.ResponseBody[], data: Cart.ResponseTotals[]): Cart.Total => {
   const totals = [];
-
   data.forEach((row) => {
-    body.forEach((item) => {
+    items.forEach((item) => {
       if (row.id === item.id) {
         totals.push({
           taxes: calculateTaxes(row, item.quantity),

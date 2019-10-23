@@ -9,6 +9,6 @@ export namespace Products {
   }
 
   interface Model {
-    getProducts: () => any;
+    getProducts: () => Promise<Item[]>;
   }
 }
